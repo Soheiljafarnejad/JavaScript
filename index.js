@@ -1,5 +1,5 @@
 const redux = require("redux");
-// const createStore = redux.createStore();
+const createStore = redux.createStore;
 
 const BUY_CAKE = "BUY-CAKE";
 
@@ -12,7 +12,6 @@ function buyCake() {
 const initState = {
   numberCake: 10,
 };
-
 function reducer(state = initState, action) {
   switch (action.type) {
     case BUY_CAKE:
@@ -20,4 +19,10 @@ function reducer(state = initState, action) {
   }
 }
 
-// createStore();
+const store = createStore(reducer);
+
+store.dispatch(buyCake());
+store.dispatch(buyCake());
+store.dispatch(buyCake());
+
+console.log(store.getState());
