@@ -12,17 +12,22 @@ function buyCake() {
 const initState = {
   numberCake: 10,
 };
-function reducer(state = initState, action) {
+const reducer = (state = initState, action) => {
   switch (action.type) {
     case BUY_CAKE:
       return { ...state, numberCake: state.numberCake - 1 };
+    default:
+      return state;
   }
-}
+};
 
 const store = createStore(reducer);
 
+console.log("initial state", store.getState());
+
+store.subscribe(() => console.log("updated", store.getState()));
+
 store.dispatch(buyCake());
 store.dispatch(buyCake());
 store.dispatch(buyCake());
 
-console.log(store.getState());
