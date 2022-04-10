@@ -1,5 +1,6 @@
 const redux = require("redux");
 const createStore = redux.createStore;
+const combineReducers = redux.combineReducers;
 
 const BUY_CAKE = "BUY-CAKE";
 const BUY_ICE = "BUY-ICE";
@@ -16,21 +17,36 @@ function buyIce() {
   };
 }
 
-const initState = {
+const initCake = {
   numberCake: 10,
+};
+
+const initIce = {
   numberIce: 20,
 };
 
-const reducer = (state = initState, action) => {
+const cakeReducer = (state = initCake, action) => {
   switch (action.type) {
     case BUY_CAKE:
       return { ...state, numberCake: state.numberCake - 1 };
+    default:
+      return state;
+  }
+};
+
+const iceReducer = (state = initIce, action) => {
+  switch (action.type) {
     case BUY_ICE:
       return { ...state, numberIce: state.numberIce - 1 };
     default:
       return state;
   }
 };
+
+const reducer = combineReducers({
+  cake: cakeReducer,
+  ice: iceReducer,
+});
 
 const store = createStore(reducer);
 
